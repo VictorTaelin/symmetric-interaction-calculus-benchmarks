@@ -1,0 +1,70 @@
+(identity)
+/id #x x
+
+(Y-combinator.)
+/Y  =Ya x_a x_b x
+    =Yb y_a y_b y
+    =Yc f_a f_b f
+    #f :#x :f_a :x_a x_b
+        #y :f_b :y_a y_b
+
+(Nat successor.)
+/Succ #n
+    #Succ #-
+    :Succ n
+
+(Nat zero.)
+/Zero
+    #- #Zero
+    Zero
+
+(Binary Zero constructor.)
+/O #bs
+    #O #- #-
+    :O bs
+
+(Binary One constructor.)
+/I #bs
+    #- #I #-
+    :I bs
+
+(Binary Zero constructor.)
+/E 
+    #- #- #E
+    E
+
+(Binary Tree node.)
+/Node #a #b
+    #Node #-
+    ::Node a b
+
+(Binary Tree tip.)
+/Tip
+    #- #Tip
+    Tip
+
+(Creates a binary tree of given depth.)
+/build :Y #rec #depth
+    =bld rec_a rec_b rec
+    ::depth
+        #dep
+            =p dep_a dep_b dep
+            ::Node :rec_a dep_a :rec_b dep_b
+        Tip
+
+(Destroys a binary tree.)
+/destroy :Y #rec #tree
+    =dst rec_a rec_b rec
+    ::tree
+        #lef #rig #x ::rec_a lef ::rec_b rig x
+        id
+
+:destroy
+:build
+    :Succ :Succ :Succ :Succ
+    :Succ :Succ :Succ :Succ
+    :Succ :Succ :Succ :Succ
+    :Succ :Succ :Succ :Succ
+    :Succ :Succ :Succ :Succ
+    :Succ :Succ :Succ :Succ
+    Zero
